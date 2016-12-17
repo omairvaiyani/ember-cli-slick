@@ -105,7 +105,10 @@ export default Ember.Component.extend({
       rtl              : this.get('rtl')
     })
     .on('afterChange', function ($event, slick, currentSlide) {
-      _this.set("currentSlide", currentSlide);
+      if(_this && !_this.get('isDestroyed')) {
+        _this.set("currentSlide", currentSlide);
+      }
+      
       _this.sendAction('afterChange', slick, currentSlide);
     })
     .on('beforeChange', function ($event, slick, currentSlide, nextSlide) {
